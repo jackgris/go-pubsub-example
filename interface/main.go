@@ -56,6 +56,7 @@ func (ps *PubSubImpl) Subscribe(topic string) <-chan interface{} {
 	return subscriber
 }
 
+// Wait will wait until all messages are published
 func (ps *PubSubImpl) Wait() {
 	ps.waitGroup.Wait()
 }
@@ -73,6 +74,8 @@ func main() {
 	subscriber1 := pubsub.Subscribe("topic1")
 	subscriber2 := pubsub.Subscribe("topic2")
 	subscriber3 := pubsub.Subscribe("topic3")
+	subscriber4 := pubsub.Subscribe("topic3")
+	subscriber5 := pubsub.Subscribe("topic3")
 
 	// Publish a message to the topics
 	pubsub.Publish("topic1", "Hello, subscribers number one!")
@@ -92,10 +95,14 @@ func main() {
 				fmt.Println("subcriber 1", message)
 			case message := <-subscriber2:
 				fmt.Println("subcriber 2", message)
-
 			case message := <-subscriber3:
 				fmt.Println("subcriber 3", message)
+			case message := <-subscriber4:
+				fmt.Println("subcriber 4", message)
+			case message := <-subscriber5:
+				fmt.Println("subcriber 5", message)
 			}
+
 		}
 	}()
 
