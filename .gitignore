@@ -1,0 +1,13 @@
+### NextJS ###
+# Next build dir
+public/.next/*
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+# Node modules
+public/node_modules/*
