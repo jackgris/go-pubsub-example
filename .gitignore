@@ -1,6 +1,6 @@
 ### NextJS ###
 # Next build dir
-public/.next/*
+**/public/.next/*
 
 ### react ###
 .DS_*
@@ -10,4 +10,4 @@ logs
 **/*.back.*
 
 # Node modules
-public/node_modules/*
+**/node_modules/*
