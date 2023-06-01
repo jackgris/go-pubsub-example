@@ -23,7 +23,7 @@ func main() {
 	})
 
 	// Initiate the Pub/Sub service created by us.
-	pubsub := NewPubSub()
+	var pubsub PubSub = NewPubSub()
 	// In this case we only have one topic, one chat room.
 	subscribe := pubsub.Subscribe("chat")
 	// With this will save all the websocket connections that are active.
@@ -72,9 +72,6 @@ func main() {
 	// For that we need the channel for communication and all the connections.
 	go func(subs <-chan Msg, conn map[string]*websocket.Conn) {
 		for {
-			if subs == nil {
-				panic("We need our subscriber.")
-			}
 			message := <-subs
 			m, err := json.Marshal(message)
 			if err != nil {
@@ -87,9 +84,7 @@ func main() {
 					log.Printf("Error while write to ID: %s with err: %s\n", message.Id, err)
 				}
 			}
-
 		}
-
 	}(subscribe, connections)
 
 	log.Fatal(app.Listen(":8080"))

@@ -60,8 +60,3 @@ func (ps *PubSubImpl) Subscribe(topic string) <-chan Msg {
 
 	return subscriber
 }
-
-// Wait will wait until all messages are published
-func (ps *PubSubImpl) Wait() {
-	ps.waitGroup.Wait()
-}
