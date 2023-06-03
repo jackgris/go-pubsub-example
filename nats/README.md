@@ -40,5 +40,23 @@ Escape character is '^]'.
 INFO {"server_id":"NDP7NP2P2KADDDUUBUDG6VSSWKCW4IC5BQHAYVMLVAJEGZITE5XP7O5J","version":"2.0.0","proto":1,"go":"go1.11.10","host":"0.0.0.0","port":4222,"max_payload":1048576,"client_id":13249}
 ```
 
+## Run our server (subcriber)
 
+First you have to run the subscriber, this will create a topic in the Nats Server running in the Docker container, this are inside the server folder.
+For run this example, in this folder you only have to run this command:
 
+```bash
+go run ./main.go
+```
+
+You don't have to see anything until the client publish the messages. After that you can see the messages in this server and you can see the logs in the Docker container.
+
+## Run our clients (publisher)
+
+This application is in the client folder. For run this example, in this folder you only have to run this command:
+
+```bash
+go run ./main.go
+```
+
+This will publish 500 messages into the Nats Server running in the Docker container, and our server application will receive and show all the messages.
