@@ -10,6 +10,7 @@ import (
 type PubSub interface {
 	Publish(topic string, message interface{})
 	Subscribe(topic string) <-chan interface{}
+	Wait()
 }
 
 // PubSubImpl implement the PubSub interface. This struct will manage the topics, subscribers, and message distribution.
@@ -61,6 +62,8 @@ func (ps *PubSubImpl) Wait() {
 	ps.waitGroup.Wait()
 }
 
+var pubsub PubSub
+
 // In this example, a message is published to "topic1", and the subscriber receives the message through the channel.
 // You can have multiple subscribers to the same topic, and each subscriber will receive the published message independently.
 // By leveraging channels and goroutines, you can achieve concurrent and asynchronous message distribution,
@@ -68,7 +71,7 @@ func (ps *PubSubImpl) Wait() {
 func main() {
 	// Use the Pub/Sub implementation in your application by creating a new instance of PubSubImpl,
 	// publishing messages, and subscribing to topics.
-	pubsub := NewPubSub()
+	pubsub = NewPubSub()
 
 	// Subscribe to different topics
 	subscriber1 := pubsub.Subscribe("topic1")
